@@ -31,12 +31,11 @@ impl<R: ::std::io::BufRead> Scanner<R> {
             self.buffer = input.split_whitespace().rev().map(String::from).collect();
         }
     }
-    pub fn token_bytes(&mut self) -> Vec<u8> {
-        let s = self.token::<String>();
-        return s.as_bytes().into();
-    }
+    //    pub fn token_bytes(&mut self) -> Vec<u8> {
+    //        let s = self.token::<String>();
+    //        return s.as_bytes().into();
+    //    }
 }
-
 
 // const MOD:usize = 1000000000+7;
 // https://atcoder.jp/contests/abc272/tasks/abc272_e

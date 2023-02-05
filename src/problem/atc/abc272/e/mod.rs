@@ -1,2 +1,2 @@
 mod abc272_e;
-mod test_ab272e;
+mod abc272_e_test;
