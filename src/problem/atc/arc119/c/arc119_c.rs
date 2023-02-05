@@ -93,7 +93,7 @@ mod arc119_c {
 
 // const MOD:usize = 1000000000+7;
 // https://atcoder.jp/contests/arc119/tasks/arc119_c
-fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
+pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();
     let mut cnt = HashMap::new();
     let mut s = 0i64;
