@@ -90,9 +90,9 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
             mn[0] = i32::MAX;
         }
         if (m + n) & 1 == 1 && mn[m] <= 0 && 0 <= mx[m] {
-            writeln!(out, "YES")?;
+            writeln!(out, "YES").ok();
         } else {
-            writeln!(out, "NO")?;
+            writeln!(out, "NO").ok();
         }
     }
 }
