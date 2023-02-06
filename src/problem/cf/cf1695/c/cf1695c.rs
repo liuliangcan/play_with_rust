@@ -1,4 +1,3 @@
-mod problem;
 use std::cmp::{max, min};
 #[allow(unused)]
 use std::collections::*;
@@ -48,7 +47,7 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
         let n = scan.token::<usize>();
         let m = scan.token::<usize>();
 
-        let mut mx = vec![-1000000000i64; m + 1];
+        let mut mx = vec![- 1000000000i64; m + 1];
         let mut mn = vec![1000000000i64; m + 1];
         mx[0] = 0;
         mn[0] = 0;
@@ -68,4 +67,3 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
         }
     }
 }
-
