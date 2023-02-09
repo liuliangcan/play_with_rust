@@ -3,69 +3,65 @@ use std::cmp::{max, min};
 #[allow(unused)]
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
+use std::fmt::Debug;
+use std::io;
+use std::str::FromStr;
+use std::collections::HashMap;
 
-fn main() {
-    let sin = std::io::stdin();
-    let scan = &mut Scanner::new(sin.lock());
-    let sout = std::io::stdout();
-    let out = &mut BufWriter::new(sout.lock());
-    solve(scan, out);
+pub fn input<T: std::str::FromStr>() -> T
+    where
+        <T as FromStr>::Err: Debug,
+{
+    let mut inp = String::new();
+    io::stdin().read_line(&mut inp).expect("IO error");
+    return inp.trim().parse::<T>().unwrap();
 }
 
-pub struct Scanner<R> {
-    reader: R,
-    buffer: Vec<String>,
+pub fn input_vec<T: std::str::FromStr>() -> Vec<T>
+    where
+        <T as FromStr>::Err: Debug,
+{
+    let v: Vec<T> = input::<String>() //inputing a string
+        .split(' ') // spliting it by white space
+        .map(|x| x.parse::<T>().expect("Nan")) //mapping each of them to the type T
+        .collect(); // collecting the mapped vector
+    v
 }
-impl<R: ::std::io::BufRead> Scanner<R> {
-    pub fn new(reader: R) -> Self {
-        Self {
-            reader,
-            buffer: vec![],
-        }
+
+fn eval(v: &Vec<(usize, usize)>) -> Vec<(usize, usize)> {
+    let mut last = 0;
+    let mut ans = vec![];
+    for (l, r) in v {
+        if l <= &last { continue; }
+        ans.push((*l, *r));
+        last = *r;
     }
-    pub fn token<T: ::std::str::FromStr>(&mut self) -> T {
-        loop {
-            if let Some(token) = self.buffer.pop() {
-                return token.parse().ok().expect("Failed parse");
+    ans
+}
+
+fn main(){
+    let n: usize = input();
+    let a: Vec<i32> = input_vec();
+    let mut mp = HashMap::<i32, Vec<(usize, usize)>>::new();
+    let pref: Vec<i32> = a.iter().scan(0, |state, x| { *state += x; return Some(*state); }).collect();
+    for i in 0..n {
+        for j in i..n {
+            let mut s = pref[j];
+            if i > 0 { s -= pref[i - 1]; }
+            if !mp.contains_key(&s) {
+                mp.insert(s, Vec::new());
             }
-            let mut input = String::new();
-            self.reader.read_line(&mut input).expect("Failed read");
-            self.buffer = input.split_whitespace().rev().map(String::from).collect();
+            mp.get_mut(&s).unwrap().push((i + 1, j + 1));
         }
     }
-    //    pub fn token_bytes(&mut self) -> Vec<u8> {
-    //        let s = self.token::<String>();
-    //        return s.as_bytes().into();
-    //    }
+
+    mp.values_mut()
+        .map(|x| x.sort_by(|(_, j1), (_, j2)|  j1.cmp(j2) ))
+        .last();
+    println!("{:?}", mp);
+    let res = mp.values()
+        .map(|x| eval(x))
+        .max_by(|u, v| u.len().cmp(&v.len())).unwrap();
+    println!("{}", res.len());
+    res.into_iter().for_each(|(l, r)| println!("{l} {r}"));
 }
-
-// const MOD:usize = 1000000000+7;
-// https://codeforces.com/problemset/problem/1695/C
-// 本模板由 https://github.com/liuliangcan/play_with_python/blob/main/tools/gen_code_tool/gen_template.py 自动生成;中文题面描述可移步
-pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
-    let t = scan.token::<usize>();
-    for _ in 0..t {
-        let n = scan.token::<usize>();
-        let m = scan.token::<usize>();
-
-        let mut mx = vec![-1000000000i64; m + 1];
-        let mut mn = vec![1000000000i64; m + 1];
-        mx[0] = 0;
-        mn[0] = 0;
-        for _ in 0..n {
-            for j in 1..=m {
-                let a = scan.token::<i64>();
-                mx[j] = max(mx[j], mx[j - 1]) + a;
-                mn[j] = min(mn[j], mn[j - 1]) + a;
-            }
-            mx[0] = -1000000000;
-            mn[0] = 1000000000;
-        }
-        if (m + n) & 1 == 1 && mn[m] <= 0 && 0 <= mx[m] {
-            writeln!(out, "YES").ok();
-        } else {
-            writeln!(out, "NO").ok();
-        }
-    }
-}
-
