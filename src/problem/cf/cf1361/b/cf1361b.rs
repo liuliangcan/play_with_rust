@@ -31,12 +31,11 @@ impl<R: ::std::io::BufRead> Scanner<R> {
             self.buffer = input.split_whitespace().rev().map(String::from).collect();
         }
     }
-//    pub fn token_bytes(&mut self) -> Vec<u8> {
-//        let s = self.token::<String>();
-//        return s.as_bytes().into();
-//    }
+    //    pub fn token_bytes(&mut self) -> Vec<u8> {
+    //        let s = self.token::<String>();
+    //        return s.as_bytes().into();
+    //    }
 }
-
 
 fn pow_mod(mut a: i64, mut b: i64, p: i64) -> i64 {
     let mut ans = 1;
@@ -50,14 +49,15 @@ fn pow_mod(mut a: i64, mut b: i64, p: i64) -> i64 {
     return ans;
 }
 
-const MOD:i64 = 1000000000+7;
-pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
+const MOD: i64 = 1000000000 + 7;
+pub fn solve1(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();
     let p = scan.token::<i64>();
     let mut a = vec![0i32; n];
     for i in 0..n {
         a[i] = scan.token::<i32>();
     }
+
     if p == 1 {
         writeln!(out, "{}", n % 2).ok();
         return;
@@ -65,7 +65,7 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     a.sort();
     let mut st = vec![(0, 0); 0];
     let mut target_k = a[n - 1];
-    let mut i:i32 = n as i32 - 2;
+    let mut i: i32 = n as i32 - 2;
     while i >= 0 {
         let mut k = a[i as usize];
         while st.len() > 0 && st[st.len() - 1] == (k, p - 1) {
@@ -92,6 +92,90 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     for &(k, c) in &st {
         ans -= pow_mod(p, k as i64, MOD as i64) * c;
     }
+    writeln!(out, "{}", (ans % MOD + MOD) % MOD).ok();
+}
+
+pub fn solve2(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
+    let n = scan.token::<usize>();
+    let p = scan.token::<i64>();
+    let mut a: Vec<i32> = (0..n).map(|_| scan.token::<i32>()).collect();
+
+    if p == 1 {
+        writeln!(out, "{}", n % 2).ok();
+        return;
+    }
+    a.sort_unstable();
+    let mut st = vec![(0, 0); 0];
+    let mut target_k = a[n - 1];
+    let mut i: i32 = n as i32 - 2;
+    while i >= 0 {
+        let mut k = a[i as usize];
+        while st.len() > 0 && *st.last().unwrap() == (k, p - 1) {
+            st.pop();
+            k += 1;
+        }
+        if k == target_k {
+            if i == 0 {
+                writeln!(out, "0").ok();
+                return;
+            }
+            i -= 1;
+            target_k = a[i as usize];
+        } else if st.len() > 0 && st[st.len() - 1].0 == k {
+            st.last_mut().unwrap().1 += 1
+        } else {
+            st.push((k, 1));
+        }
+        i -= 1;
+    }
+
+    let mut ans = pow_mod(p, target_k as i64, MOD as i64);
+    ans -= st
+        .iter()
+        .map(|&(k, c)| pow_mod(p, k as i64, MOD as i64) * c)
+        .sum::<i64>();
+
+    writeln!(out, "{}", (ans % MOD + MOD) % MOD).ok();
+}
+
+pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
+    let n = scan.token::<usize>();
+    let p = scan.token::<i64>();
+    let mut a: Vec<i32> = (0..n).map(|_| scan.token::<i32>()).collect();
+
+    if p == 1 {
+        writeln!(out, "{}", n % 2).ok();
+        return;
+    }
+    a.sort_unstable();
+    let mut st = vec![(0, 0); 0];
+    let mut target_k = a.pop().unwrap();;
+
+    while !a.is_empty() {
+        let mut k = a.pop().unwrap();
+        while !st.is_empty() && *st.last().unwrap() == (k, p - 1) {
+            st.pop();
+            k += 1;
+        }
+        if k == target_k {
+            if a.is_empty() {
+                writeln!(out, "0").ok();
+                return;
+            }
+            target_k = a.pop().unwrap();
+        } else if !st.is_empty() && st.last().unwrap().0 == k {
+            st.last_mut().unwrap().1 += 1
+        } else {
+            st.push((k, 1));
+        }
+    }
+
+    let mut ans = pow_mod(p, target_k as i64, MOD as i64);
+    ans -= st
+        .iter()
+        .map(|&(k, c)| pow_mod(p, k as i64, MOD as i64) * c)
+        .sum::<i64>();
+
     writeln!(out, "{}", (ans % MOD + MOD) % MOD).ok();
 }
 
