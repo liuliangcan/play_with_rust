@@ -31,7 +31,7 @@ where
 fn main() {
     let mut a = vec![vec![1, 2, 3, 4, 5]; 4];
     println!("{:?}", a);
-    let t = a[1].clone();
-    a[0].extend(t);
+    let  ( x,y) = a.split_at_mut(1);
+    x[0].extend(&y[0]);
     println!("{:?}", a);
 }
