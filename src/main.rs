@@ -29,9 +29,12 @@ where
 }
 
 fn main() {
-    let mut a = vec![vec![1, 2, 3, 4, 5]; 4];
-    println!("{:?}", a);
-    let  ( x,y) = a.split_at_mut(1);
-    x[0].extend(&y[0]);
+    // let mut a = vec![vec![1, 2, 3, 4, 5]; 4];
+    // println!("{:?}", a);
+    // let  ( x,y) = a.split_at_mut(1);
+    // x[0].extend(&y[0]);
+    // println!("{:?}", a);
+    let n:usize = 10;
+    let a = (0..n).collect::<Vec<usize>>();
     println!("{:?}", a);
 }
