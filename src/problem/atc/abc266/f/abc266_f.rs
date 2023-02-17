@@ -2,6 +2,7 @@
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
 
+#[allow(unused)]
 // use petgraph::unionfind::UnionFind;
 fn main() {
     let sin = std::io::stdin();
@@ -38,7 +39,7 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();
     let mut degree = vec![0i32; n];
     let mut g = vec![Vec::new(); n];
-    for i in 0..n {
+    for _ in 0..n {
         let u = scan.token::<usize>() - 1;
         let v = scan.token::<usize>() - 1;
         g[u].push(v);
@@ -81,6 +82,7 @@ pub fn run(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
 // https://atcoder.jp/contests/abc266/tasks/abc266_f
 // 本模板由 https://github.com/liuliangcan/play_with_python/blob/main/tools/gen_code_tool/gen_template.py 自动生成;中文题面描述可移步
 
+#[allow(unused)]
 pub struct DSU {
     n: usize,
     fa: Vec<usize>,
@@ -113,7 +115,10 @@ impl DSU {
             return false;
         }
         if self.size[x] == self.size[y] {
-            let (x, y) = (y, x); // 新版可以写成 (x, y) = (y, x)
+            // (x, y) = (y, x); // cf以外可以写成 (x, y) = (y, x)
+            let t= x;
+            x = y;
+            y = t;
         }
         self.fa[x] = y;
         self.size[y] += 1;

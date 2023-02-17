@@ -2,6 +2,7 @@
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
 
+#[allow(unused)]
 fn main() {
     let sin = std::io::stdin();
     let scan = &mut Scanner::new(sin.lock());

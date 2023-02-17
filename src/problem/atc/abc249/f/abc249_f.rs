@@ -2,6 +2,7 @@
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
 
+#[allow(unused)]
 fn main() {
     let sin = std::io::stdin();
     let scan = &mut Scanner::new(sin.lock());
@@ -39,11 +40,9 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let mut k = scan.token::<usize>();
     let mut a = vec![(0u8, 0i64); 0];
     let mut x = 0i64;
-    let mut op = 0u8;
-    let mut y = 0i64;
     for _ in 0..n {
-        op = scan.token::<u8>();
-        y = scan.token::<i64>();
+        let op = scan.token::<u8>();
+        let y = scan.token::<i64>();
         if op == 1 {
             a.push((op, y - x));
             x = y;
@@ -76,7 +75,7 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     }
     writeln!(out, "{}", ans).ok();
 }
-
+#[allow(unused)]
 // 56ms
 pub fn solve1(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();

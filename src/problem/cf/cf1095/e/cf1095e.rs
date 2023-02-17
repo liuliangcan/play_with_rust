@@ -1,7 +1,7 @@
 #[allow(unused)]
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
-
+#[allow(unused)]
 fn main() {
     let sin = std::io::stdin();
     let scan = &mut Scanner::new(sin.lock());
@@ -80,6 +80,7 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
 }
 
 // s作为String读入后转chars 31ms
+#[allow(unused)]
 pub fn solve2(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();
     let s = scan.token::<String>().chars().collect::<Vec<_>>();
@@ -121,6 +122,7 @@ pub fn solve2(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
 }
 
 // s作为String读入后切片&str处理
+#[allow(unused)]
 pub fn solve1(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();
     let s = scan.token::<String>();

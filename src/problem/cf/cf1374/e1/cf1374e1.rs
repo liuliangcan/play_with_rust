@@ -1,7 +1,7 @@
 #[allow(unused)]
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
-
+#[allow(unused)]
 fn main() {
     let sin = std::io::stdin();
     let scan = &mut Scanner::new(sin.lock());
@@ -53,7 +53,7 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
         }
     }
     if a.len() > b.len() {
-        let mut t = a;
+        let t = a;
         a = b;
         b = t
     }

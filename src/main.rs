@@ -1,11 +1,8 @@
 mod problem;
-use std::cmp::{max, min};
-use std::collections::HashMap;
 #[allow(unused)]
-use std::collections::*;
+use std::collections::HashMap;
 use std::fmt::Debug;
 use std::io;
-use std::io::{BufRead, BufWriter, Write};
 use std::str::FromStr;
 
 pub fn input<T: std::str::FromStr>() -> T

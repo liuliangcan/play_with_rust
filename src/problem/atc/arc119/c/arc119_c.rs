@@ -2,6 +2,7 @@
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
 
+#[allow(unused)]
 fn main() {
     let sin = std::io::stdin();
     let scan = &mut Scanner::new(sin.lock());
@@ -40,6 +41,7 @@ impl<R: ::std::io::BufRead> Scanner<R> {
             self.buffer = input.split_whitespace().rev().map(String::from).collect();
         }
     }
+    #[allow(unused)]
     pub fn token_bytes(&mut self) -> Vec<u8> {
         let s = self.token::<String>();
         return s.as_bytes().into();

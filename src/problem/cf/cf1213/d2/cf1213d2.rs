@@ -1,7 +1,7 @@
 #[allow(unused)]
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
-
+#[allow(unused)]
 fn main() {
     let sin = std::io::stdin();
     let scan = &mut Scanner::new(sin.lock());
@@ -73,7 +73,7 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
             left -= b[j];
         }
         let i2 = i / 2;
-        let mut c = x.get_mut(i2).unwrap();
+        let c = x.get_mut(i2).unwrap();
         if c.len() == 0{
             c.push(0);
             c.extend(b);
@@ -89,7 +89,7 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     }
     writeln!(out, "{}", ans).ok();
 }
-
+#[allow(unused)]
 pub fn solve2(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();
     let k = scan.token::<usize>();
@@ -140,7 +140,7 @@ pub fn solve2(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     }
     writeln!(out, "{}", ans).ok();
 }
-
+#[allow(unused)]
 pub fn solve1(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();
     let k = scan.token::<usize>();

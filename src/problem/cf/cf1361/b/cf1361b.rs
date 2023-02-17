@@ -1,7 +1,7 @@
 #[allow(unused)]
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
-
+#[allow(unused)]
 fn main() {
     let sin = std::io::stdin();
     let scan = &mut Scanner::new(sin.lock());
@@ -50,6 +50,7 @@ fn pow_mod(mut a: i64, mut b: i64, p: i64) -> i64 {
 }
 
 const MOD: i64 = 1000000000 + 7;
+#[allow(unused)]
 pub fn solve1(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();
     let p = scan.token::<i64>();
@@ -94,7 +95,7 @@ pub fn solve1(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     }
     writeln!(out, "{}", (ans % MOD + MOD) % MOD).ok();
 }
-
+#[allow(unused)]
 pub fn solve2(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();
     let p = scan.token::<i64>();
@@ -149,7 +150,7 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     }
     a.sort_unstable();
     let mut st = vec![(0, 0); 0];
-    let mut target_k = a.pop().unwrap();;
+    let mut target_k = a.pop().unwrap();
 
     while !a.is_empty() {
         let mut k = a.pop().unwrap();

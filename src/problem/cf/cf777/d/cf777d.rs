@@ -3,6 +3,7 @@ use std::cmp::min;
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
 
+#[allow(unused)]
 fn main() {
     let sin = std::io::stdin();
     let scan = &mut Scanner::new(sin.lock());
@@ -69,6 +70,7 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
         writeln!(out, "{}", s).ok();
     }
 }
+#[allow(unused)]
 pub fn solve1(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     // 171 ms Vec[u]操作
     let n = scan.token::<usize>();

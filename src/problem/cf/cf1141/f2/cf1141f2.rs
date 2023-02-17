@@ -1,7 +1,7 @@
 #[allow(unused)]
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
-
+#[allow(unused)]
 fn main() {
     let sin = std::io::stdin();
     let scan = &mut Scanner::new(sin.lock());
@@ -40,6 +40,7 @@ impl<R: ::std::io::BufRead> Scanner<R> {
 // const MOD:usize = 1000000000+7;
 // https://codeforces.com/problemset/problem/1141/F2
 // 本模板由 https://github.com/liuliangcan/play_with_python/blob/main/tools/gen_code_tool/gen_template.py 自动生成;中文题面描述可移步
+#[allow(unused)]
 pub fn solve1(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();
     let mut a = vec![0i32; n + 1];
