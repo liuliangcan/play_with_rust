@@ -1,7 +1,7 @@
+
 #[allow(unused)]
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
-
 fn main() {
     let sin = std::io::stdin();
     let scan = &mut Scanner::new(sin.lock());
@@ -77,13 +77,16 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
             write!(out, "{} ", d1[i]).ok();
         }
     }
+    // 以下在cf上编译不通过：use of undeclared crate or module `itertools`
+    // use itertools::Itertools;
+    // let ans = (1..=n)
+    //     .map(|i| if a[i] % 2 == 1 { d0[i] } else { d1[i] })
+    //     .into_iter()
+    //     .join(" ");
+    // writeln!(out, "{}", ans).ok();
 }
 
 pub fn run(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
-    // let t = scan.token::<usize>();
-    // for _ in 0..t {
-    //     solve(scan, out)
-    // }
     solve(scan, out)
 }
 // https://codeforces.com/problemset/problem/1272/E
