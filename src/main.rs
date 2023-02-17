@@ -1,4 +1,5 @@
 mod problem;
+use itertools::Itertools;
 #[allow(unused)]
 use std::collections::HashMap;
 use std::fmt::Debug;
@@ -31,7 +32,8 @@ fn main() {
     // let  ( x,y) = a.split_at_mut(1);
     // x[0].extend(&y[0]);
     // println!("{:?}", a);
-    let n:usize = 10;
-    let a = (0..n).collect::<Vec<usize>>();
+    // let n:usize = 10;
+    let a =  vec![0, 1];
     println!("{:?}", a);
+    println!("{}",a.iter().join(", "));
 }
