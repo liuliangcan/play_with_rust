@@ -98,7 +98,7 @@ pub fn run(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
 pub struct MonoStack {
     a: Vec<i32>,
 }
-
+#[allow(unused)]
 impl MonoStack {
     /// 不知道怎么存引用，进来后会clone一份a
     pub fn new(a: &Vec<i32>) -> Self {
