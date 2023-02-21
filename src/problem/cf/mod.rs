@@ -10,3 +10,4 @@ mod cf1095;
 mod cf165;
 mod cf1272;
 mod cf600;
+mod cf5;
