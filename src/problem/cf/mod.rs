@@ -11,3 +11,4 @@ mod cf165;
 mod cf1272;
 mod cf600;
 mod cf5;
+mod cf547;
