@@ -13,3 +13,4 @@ mod cf600;
 mod cf5;
 mod cf547;
 mod cf1358;
+mod cf584;
