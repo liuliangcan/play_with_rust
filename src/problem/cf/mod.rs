@@ -22,3 +22,4 @@ mod cf1721;
 mod cf1659;
 mod cf388;
 mod cf1525;
+mod cf1554;
