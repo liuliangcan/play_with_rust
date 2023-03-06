@@ -1,5 +1,3 @@
-mod problem;
-
 #[allow(unused)]
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
@@ -58,8 +56,7 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
         writeln!(out, "-1").ok();
         return;
     }
-
-    if y <= x || m == 0{
+    if y <= x || m == 0 {
         if m == 2 && a[0] + 1 == a[1] {
             writeln!(out, "{}", x.min(2 * y)).ok();
             return;
