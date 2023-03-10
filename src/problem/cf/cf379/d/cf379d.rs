@@ -56,16 +56,16 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
                             continue;
                         }
                         for ac2 in 0..=(m - a2 - c2) / 2 {
-                            let (mut A1, mut AC1, mut C1, mut A2, mut AC2, mut C2) =
+                            let (mut _a1, mut _ac1, mut _c1, mut _a2, mut _ac2, mut _c2) =
                                 (a1, ac1, c1, a2, ac2, c2);
                             for _ in 2..k {
-                                (C1, AC1, A1, C2, AC2, A2) =
-                                    (C2, AC2, A2, C1, AC1 + AC2 + (A1 & C2), A2);
-                                if AC2 > x {
+                                (_c1, _ac1, _a1, _c2, _ac2, _a2) =
+                                    (_c2, _ac2, _a2, _c1, _ac1 + _ac2 + (_a1 & _c2), _a2);
+                                if _ac2 > x {
                                     break;
                                 }
                             }
-                            if AC2 == x {
+                            if _ac2 == x {
                                 writeln!(
                                     out,
                                     "{}{}{}{}",
