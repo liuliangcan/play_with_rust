@@ -33,3 +33,5 @@ mod cf337;
 mod cf1739;
 mod cf652;
 mod cf379;
+mod cf1379;
+mod cf1304;
