@@ -35,3 +35,4 @@ mod cf652;
 mod cf379;
 mod cf1379;
 mod cf1304;
+mod cf1156;
