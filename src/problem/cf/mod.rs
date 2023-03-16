@@ -37,3 +37,4 @@ mod cf1379;
 mod cf1304;
 mod cf1156;
 mod cf687;
+mod cf1054;
