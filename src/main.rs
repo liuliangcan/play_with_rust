@@ -4,12 +4,22 @@ mod problem;
 use std::collections::*;
 #[allow(unused)]
 use std::io::{BufRead, BufWriter, Write};
+use itertools::Itertools;
+
 #[allow(unused)]
 fn main() {
-    // let x:Vec<i32> = (0..10).collect();
-    let r = [0,1,2,3,4];
-    let y:Vec<i32> = (0..10).map(|x|x).collect::<_>();
-    println!("{:?}", y);
+    use std::collections::HashMap;
+
+    let map = HashMap::from([
+        ("a", 1),
+        ("b", 2),
+        ("c", 3),
+    ]);
+    let x = map.values().collect_vec();
+    println!("{:?}",x);
+    // for val in map.values() {
+    //     println!("{:?}",val);
+    // }
 }
 
 // https://codeforces.com/problemset/problem/1733/D2
