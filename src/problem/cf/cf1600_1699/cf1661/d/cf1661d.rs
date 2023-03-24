@@ -24,9 +24,9 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
             ans += times;
             a += times * k2;
             if i > 0 {
-                d2[i-1] -= times ;
-                if i > k2 as usize{
-                    d2[i-k2 as usize -1] += times;
+                d2[i - 1] -= times;
+                if i > k2 as usize {
+                    d2[i - k2 as usize - 1] += times;
                 }
             }
         }
