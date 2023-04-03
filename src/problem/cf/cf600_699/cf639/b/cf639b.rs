@@ -8,37 +8,36 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();
     let d = scan.token::<usize>();
     let h = scan.token::<usize>();
-    if 2*h <d || d==1&&n>2{
+    if 2 * h < d || d == 1 && n > 2 {
         writeln!(out, "-1").ok();
         return;
     }
-    if n == 2{
-        writeln!(out,"1 2").ok();
+    if n == 2 {
+        writeln!(out, "1 2").ok();
         return;
     }
-    if h == 1{
-        for i in 2..=n{
-            writeln!(out,"1 {}",i).ok();
+    if h == 1 {
+        for i in 2..=n {
+            writeln!(out, "1 {}", i).ok();
         }
-        return
+        return;
     }
-    for i in 1..=h{
-        writeln!(out,"{} {}",i,i+1).ok();
+    for i in 1..=h {
+        writeln!(out, "{} {}", i, i + 1).ok();
     }
-    if d > h{
-        writeln!(out,"1 {}",h+2).ok();
-        for i in h+2..=d{
-            writeln!(out,"{} {}",i,i+1).ok();
+    if d > h {
+        writeln!(out, "1 {}", h + 2).ok();
+        for i in h + 2..=d {
+            writeln!(out, "{} {}", i, i + 1).ok();
         }
     }
-    for i in d+2..=n{
-        writeln!(out,"2 {}",i).ok();
+    for i in d + 2..=n {
+        writeln!(out, "2 {}", i).ok();
     }
 }
 
 pub fn run(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
-
-    solve(scan,out)
+    solve(scan, out)
 }
 
 #[allow(unused)]
