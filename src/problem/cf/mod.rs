@@ -49,3 +49,4 @@ mod cf900_999;
 mod cf300_399;
 mod cf0_99;
 mod cf100_199;
+mod cf600_699;
