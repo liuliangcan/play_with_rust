@@ -8,32 +8,24 @@ pub fn solve(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
     let n = scan.token::<usize>();
     let m = scan.token::<usize>();
     let s = scan.token_bytes();
-    let perm3 = ["abc",
-        "acb",
-        "bac",
-        "bca",
-        "cab",
-        "cba",
-    ];
-    let mut pre =vec![vec![0;n+1];6];
-    for i in 0..6{
+    let perm3 = ["abc", "acb", "bac", "bca", "cab", "cba"];
+    let mut pre = vec![vec![0; n + 1]; 6];
+    for i in 0..6 {
         let p = perm3[i].as_bytes();
-        for (j,&c) in s.iter().enumerate(){
-            pre[i][j+1] = pre[i][j] + (c!=p[j%3]) as usize;
+        for (j, &c) in s.iter().enumerate() {
+            pre[i][j + 1] = pre[i][j] + (c != p[j % 3]) as usize;
         }
     }
-    for _ in 0..m{
+    for _ in 0..m {
         let l = scan.token::<usize>();
         let r = scan.token::<usize>();
-        let ans = (0..6).map(|x|pre[x][r]-pre[x][l-1]).min().unwrap();
+        let ans = (0..6).map(|x| pre[x][r] - pre[x][l - 1]).min().unwrap();
         writeln!(out, "{}", ans).ok();
-
     }
 }
 
 pub fn run(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
-
-    solve(scan,out)
+    solve(scan, out)
 }
 
 #[allow(unused)]
