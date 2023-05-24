@@ -1,4 +1,3 @@
-mod problem;
 #[allow(unused)]
 use std::collections::*;
 use std::io::{BufRead, BufWriter, Write};
@@ -6,32 +5,81 @@ use std::io::{BufRead, BufWriter, Write};
 // const MOD:i64 = 1000000000+7;
 
 pub struct Program {
-    // n: usize,
-    // clock: usize,
-    // a: Vec<usize>,
-    // ans: Vec<usize>,
-    // time: Vec<usize>,
+    n: usize,
+    clock: usize,
+    a: Vec<usize>,
+    ans: Vec<usize>,
+    time: Vec<usize>,
 }
 impl Program {
     pub fn new() -> Self {
         Self {
-            // n: 0,
-            // clock: 0,
-            // a: Vec::new(),
-            // ans: Vec::new(),
-            // time: Vec::new(),
+            n: 0,
+            clock: 0,
+            a: Vec::new(),
+            ans: Vec::new(),
+            time: Vec::new(),
         }
+    }
+
+    fn f(&mut self, k: usize) -> usize {
+        let clock = &mut self.clock;
+        *clock += 1;
+        let mut m = 1;
+        let mut cnt = 0;
+
+        let a = &mut self.a;
+        let time = &mut self.time;
+        for &v in a.iter() {
+            if time[v] == *clock {
+                continue;
+            }
+            cnt += 1;
+            if cnt > k {
+                m += 1;
+                *clock += 1;
+                cnt = 1;
+            }
+            time[v] = *clock
+        }
+        return m;
+    }
+    fn dfs(&mut self, l: usize, r: usize) {
+        if self.ans[l] == 0 {
+            self.ans[l] = self.f(l);
+        }
+        if self.ans[r] == 0 {
+            self.ans[r] = self.f(r);
+        }
+        if l + 1 >= r {
+            return;
+        }
+        if self.ans[l] == self.ans[r] {
+            for i in l + 1..r {
+                self.ans[i] = self.ans[l]
+            }
+            return;
+        }
+        let mid = (l + r) >> 1;
+        self.dfs(l, mid);
+        self.dfs(mid, r);
     }
     #[allow(unused)]
     pub fn solve(&mut self, scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
-        let mut n = scan.token::<usize>();
-        let mut a = Vec::with_capacity(n);
-        for i in 0..n {
-            a.push(scan.token::<i64>());
+        self.n = scan.token::<usize>();
+        self.a = Vec::with_capacity(self.n);
+        let a = &mut self.a;
+        for i in 0..self.n {
+            a.push(scan.token::<usize>());
         }
-        let mut ans = 0;
+        self.time = vec![0; self.n + 1];
+        self.ans = vec![0; self.n + 1];
+        self.clock = 0usize;
 
-        writeln!(out,"{}",ans).ok();
+        self.dfs(1, self.n);
+        for i in 1..=self.n {
+            write!(out, "{} ", self.ans[i]).ok();
+        }
     }
 }
 pub fn run(scan: &mut Scanner<impl BufRead>, out: &mut impl Write) {
